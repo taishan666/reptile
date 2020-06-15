@@ -1,5 +1,7 @@
 package com.tarzan.reptile.core;
 
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.tarzan.reptile.domain.InfoResult;
@@ -24,7 +26,7 @@ import java.util.*;
  */
 public class ZenTao {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath = ZenTao.class.getResource("/chromedriver/chromedriver.exe").getPath();
+    private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
     private static String targetPath = "http://172.16.10.26:12345/zentao/user-login-L3plbnRhby9teS5odG1s.html";
     private static String searchPath = "http://172.16.10.26:12345/zentao/my-task-assignedTo.html";
 
@@ -77,6 +79,7 @@ public class ZenTao {
         Elements preList = preDocument.select("tbody");
         Element e= preList.get(0);
         Elements list=e.select("tr");
+        ArrayList<Map<String, Object>> rows= Lists.newArrayList();
         list.forEach(item->{
             String taskCode=  item.select("td").get(0).text();
             String projectName=  item.select("td").get(2).select("a").text();
@@ -85,11 +88,29 @@ public class ZenTao {
             String planHours=  item.select("td").get(7).text();
             String useHours=  item.select("td").get(8).text();
             String status=  item.select("td").get(11).select("span").text();
+            Map<String, Object> row = new LinkedHashMap<>();
+            row.put("任务编号", taskCode);
+            row.put("所属项目", projectName);
+            row.put("任务名称", taskName);
+            row.put("完成人", userName);
+            row.put("计划时间", planHours);
+            row.put("实际时间", useHours);
+            row.put("状态", status);
+            rows.add(row);
+            // 通过工具类创建writer
+            ExcelWriter writer = ExcelUtil.getWriter("d:/禅道任务统计.xlsx");
+           // 一次性写出内容，使用默认样式，强制输出标题
+            writer.write(rows, true);
+           // 关闭writer，释放内存
+            writer.close();
             System.out.println("taskCode="+taskCode +" projectName= "+projectName+" taskName="+taskName+" userName="+userName+" planHours="+planHours+" useHours="+useHours+" status="+status);
         });
 
         return null;
     }
+
+
+
 
     /**
      * 获取token

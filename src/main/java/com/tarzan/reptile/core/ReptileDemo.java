@@ -23,7 +23,7 @@ import java.util.*;
  */
 public class ReptileDemo {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath = ReptileDemo.class.getResource("/chromedriver/chromedriver.exe").getPath();
+    private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
     private static String targetPath = "https://mp.weixin.qq.com";
     private static String searchPath = "https://mp.weixin.qq.com/cgi-bin/searchbiz";
     private static String appmsgPath = "https://mp.weixin.qq.com/cgi-bin/appmsg";
