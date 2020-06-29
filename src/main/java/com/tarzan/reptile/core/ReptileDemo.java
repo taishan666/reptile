@@ -15,6 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.expression.spel.ast.NullLiteral;
 
 import java.util.*;
 
@@ -40,14 +41,17 @@ public class ReptileDemo {
     private static String password = null;
 
     private static String token = null;
+    private static List<Platform> platformList= null;
+
+
 
 
     static {
         ResourceBundle rb = ResourceBundle.getBundle("reptile");
         username = rb.getString("reptile.username");
         password = rb.getString("reptile.password");
-        nameList.add("掌上偃师");
-        nameList.add("平安洛阳");
+        nameList.add("掌上偃师");  //每日调取接口有次数限制，所以查一个比较好
+      //  nameList.add("平安洛阳");
     }
 
     public static void main(String[] args) {
@@ -63,9 +67,11 @@ public class ReptileDemo {
                 weixinLogin(driver);
                 token=getToken(driver);
             }
-            List<Platform> list = getPlatform(driver, nameList);
-            if (CollectionUtils.isNotEmpty(list)) {
-                for (Platform platform : list) {
+            if (CollectionUtils.isEmpty(platformList)){
+                platformList= getPlatform(driver, nameList);
+            }
+            if (CollectionUtils.isNotEmpty(platformList)) {
+                for (Platform platform : platformList) {
                     InfoResult infoResult = getInfoResult(driver, token, platform.getFakeId(), 0, 5);
                     if (CollectionUtils.isNotEmpty(infoResult.getAppMsgList())) {
                         infoResult.getAppMsgList().forEach(e -> {
@@ -110,6 +116,7 @@ public class ReptileDemo {
         if (Objects.isNull(infoList)) {
             throw new Exception("获取公众号文章错误");
         }
+        Thread.sleep(15000);
         return gson.fromJson(infoList.text(), InfoResult.class);
     }
 

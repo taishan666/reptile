@@ -23,9 +23,12 @@ public class WechatTask {
 
     private static final Logger logger= LoggerFactory.getLogger("公众号文章采集");
 
+    Integer i=0;
     @Async
-    @Scheduled(cron = "*/15 * * * * ?")
+    @Scheduled(cron = "0 */30 * * * ?")
     public void task(){
+        i++;
+        logger.info("===================第"+i+"轮======================");
         logger.info("===========每隔一分钟更新警告数据start==============");
         ReptileDemo.crawling();
         logger.info("===========每隔一分钟更新警告数据end================");
