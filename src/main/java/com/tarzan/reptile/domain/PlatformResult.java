@@ -1,5 +1,6 @@
 package com.tarzan.reptile.domain;
 
+import com.tarzan.reptile.entity.PlatformEntity;
 import lombok.Data;
 import lombok.ToString;
 
@@ -11,5 +12,5 @@ import java.util.List;
 @Data
 @ToString
 public class PlatformResult {
-    private List<Platform> list;
+    private List<PlatformEntity> list;
 }

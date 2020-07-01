@@ -1,5 +1,6 @@
 package com.tarzan.reptile.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.ToString;
@@ -8,7 +9,10 @@ import lombok.ToString;
  * Created by tarzan liu on 2018/2/5.
  */
 @Data
+@ToString
+@TableName( value ="t_plat_form" )
 public class PlatformEntity {
+
     @SerializedName("fakeid")
     private String fakeId;
     private String nickname;

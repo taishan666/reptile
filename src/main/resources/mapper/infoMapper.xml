@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tarzan.reptile.mapper.InfoDao">
+
+    <insert id="insertUnique" parameterType="com.tarzan.reptile.entity.InfoEntity">
+    insert into t_public_account_article (aid, appmsgid, cover,digest,itemidx,link,title,create_time,update_time)
+    SELECT #{aid}, #{appmsgid}, #{cover},#{digest},#{itemidx},#{link},#{title},#{create_time},#{update_time}
+    FROM t_public_account_article WHERE NOT EXISTS (SELECT id FROM  t_public_account_article WHERE aid = #{aid})
+</insert>
+
+    <insert id="insertList">
+        insert into t_public_account_article (aid, appmsgid, cover,digest,itemidx,link,title,create_time,update_time)
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.aid}, #{item.appmsgid}, #{item.cover},#{item.digest},#{item.itemidx},#{item.link},#{item.title},#{item.createTime},#{item.updateTime})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        aid=values(aid)
+    </insert>
+
+</mapper>

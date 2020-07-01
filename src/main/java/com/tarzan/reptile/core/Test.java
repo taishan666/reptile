@@ -3,7 +3,11 @@ package com.tarzan.reptile.core;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.tarzan.reptile.domain.InfoResult;
+import com.tarzan.reptile.domain.PlatformResult;
 import com.tarzan.reptile.utils.HttpUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,7 +23,7 @@ import java.util.*;
 /**
  * Created by tarzan liu on 2018/2/2.
  */
-public class ZenTao {
+public class Test {
     private static String webDriver = "webdriver.chrome.driver";
     private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
     private static String targetPath = "http://172.16.10.26:12345/zentao/user-login-L3plbnRhby9teS5odG1s.html";
@@ -49,14 +53,14 @@ public class ZenTao {
                 driver = new ChromeDriver();
                 userLogin(driver);
             }
-           // String token = getToken(driver);
-              getPlatform(driver);
+            // String token = getToken(driver);
+            getPlatform(driver);
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (Objects.nonNull(driver)) {
-                    driver.close();
+                driver.close();
             }
         }
     }
@@ -94,9 +98,9 @@ public class ZenTao {
             rows.add(row);
             // 通过工具类创建writer
             ExcelWriter writer = ExcelUtil.getWriter("d:/禅道任务统计.xlsx");
-           // 一次性写出内容，使用默认样式，强制输出标题
+            // 一次性写出内容，使用默认样式，强制输出标题
             writer.write(rows, true);
-           // 关闭writer，释放内存
+            // 关闭writer，释放内存
             writer.close();
             System.out.println("taskCode="+taskCode +" projectName= "+projectName+" taskName="+taskName+" userName="+userName+" planHours="+planHours+" useHours="+useHours+" status="+status);
         });

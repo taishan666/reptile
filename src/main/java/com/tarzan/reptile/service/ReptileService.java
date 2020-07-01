@@ -1,10 +1,12 @@
-package com.tarzan.reptile.core;
+package com.tarzan.reptile.service;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.tarzan.reptile.domain.InfoResult;
 import com.tarzan.reptile.domain.PlatformResult;
 import com.tarzan.reptile.entity.PlatformEntity;
+import com.tarzan.reptile.mapper.InfoDao;
+import com.tarzan.reptile.mapper.PlatformDao;
 import com.tarzan.reptile.utils.HttpUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,13 +17,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
  * Created by tarzan liu on 2018/2/2.
  */
-public class ReptileDemo {
+@Service
+public class ReptileService {
+
     private static String webDriver = "webdriver.chrome.driver";
     private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
     private static String targetPath = "https://mp.weixin.qq.com";
@@ -32,7 +38,6 @@ public class ReptileDemo {
 
     private static WebDriver driver = null;
 
-    //private static String sourceName = "掌上偃师";   // 要爬的公众号名称(准确名称)
 
     private static List<String> nameList = new ArrayList<>();   // 要爬的公众号名称(准确名称)
 
@@ -42,7 +47,11 @@ public class ReptileDemo {
     private static String token = null;
     private static List<PlatformEntity> platformList= null;
 
+    @Autowired
+    private PlatformDao platformDao;
 
+    @Autowired
+    private InfoDao infoDao;
 
 
     static {
@@ -53,12 +62,9 @@ public class ReptileDemo {
       //  nameList.add("平安洛阳");
     }
 
-    public static void main(String[] args) {
-        crawling();
-    }
 
 
-    public static void crawling() {
+    public  void crawling() {
         System.setProperty(webDriver, webDriverPath);
         try {
             if (Objects.isNull(driver)){
@@ -67,15 +73,17 @@ public class ReptileDemo {
                 token=getToken(driver);
             }
             if (CollectionUtils.isEmpty(platformList)){
-                platformList= getPlatformEntity(driver, nameList);
+                platformList= getPlatform(driver, nameList);
             }
             if (CollectionUtils.isNotEmpty(platformList)) {
+                platformDao.insertList(platformList);
                 for (PlatformEntity platform : platformList) {
                     InfoResult infoResult = getInfoResult(driver, token, platform.getFakeId(), 0, 5);
                     if (CollectionUtils.isNotEmpty(infoResult.getAppMsgList())) {
                         infoResult.getAppMsgList().forEach(e -> {
                             System.out.println(e);
                         });
+                        infoDao.insertList(infoResult.getAppMsgList());
                     }
                 }
             }
@@ -121,12 +129,12 @@ public class ReptileDemo {
     /**
      * 获取公众号信息
      */
-    private static List<PlatformEntity> getPlatformEntity(WebDriver driver, List<String> nameList) throws Exception {
+    private static List<PlatformEntity> getPlatform(WebDriver driver, List<String> nameList) throws Exception {
         List<PlatformEntity> list = Lists.newArrayList();
         if (CollectionUtils.isNotEmpty(nameList)) {
             nameList.forEach(e -> {
                 try {
-                    PlatformEntity platform = getPlatformEntity(driver,token, e);
+                    PlatformEntity platform = getPlatform(driver,token, e);
                     list.add(platform);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -140,7 +148,7 @@ public class ReptileDemo {
     /**
      * 获取公众号信息
      */
-    private static PlatformEntity getPlatformEntity(WebDriver driver,String token,String name) throws Exception {
+    private static PlatformEntity getPlatform(WebDriver driver,String token,String name) throws Exception {
         Map<String, String> searchNameParams = new HashMap<>();
         searchNameParams.put("action", "search_biz");
         searchNameParams.put("begin", "0");
