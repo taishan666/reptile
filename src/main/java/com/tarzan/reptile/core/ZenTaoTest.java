@@ -1,23 +1,14 @@
 package com.tarzan.reptile.core;
 
-import cn.hutool.poi.excel.ExcelUtil;
-import cn.hutool.poi.excel.ExcelWriter;
-import com.google.common.collect.Lists;
-import com.tarzan.reptile.utils.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.support.ui.Select;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * 禅达快速创建任务
@@ -27,7 +18,6 @@ public class ZenTaoTest {
     private static String webDriver = "webdriver.chrome.driver";
     private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
     private static String targetPath = "http://172.16.10.26:12345/zentao/user-login-L3plbnRhby9teS5odG1s.html";
-    private static String searchPath = "http://172.16.10.26:12345/zentao/project-index.html";
 
     private static WebDriver driver = null;
 
@@ -38,7 +28,10 @@ public class ZenTaoTest {
     private static String projectName = "智能矿山项目";
 
     //任务名称
-    private static String taskName = "历史警报数据-增加测点模糊搜索";
+    private static String taskName = "应急管理-应急小组配置数据导出接口开发";
+
+    //内容描述
+    private static String content = "";
 
     //任务类型 （必须和禅道任务类型一致）
     private static String taskType = "开发";
@@ -73,7 +66,7 @@ public class ZenTaoTest {
                 e.printStackTrace();
             } finally {
                 if (Objects.nonNull(driver)) {
-                    driver.close();
+                  //  driver.close();
                 }
             }
 
@@ -84,10 +77,10 @@ public class ZenTaoTest {
     /**
      * 开始工作
      */
-    private static String work(WebDriver driver) throws Exception {
-        Map<String, String> searchNameParams = new HashMap<>();
-        searchPath = HttpUtils.setParams(searchPath, searchNameParams);
-        driver.get(searchPath);
+    private static void work(WebDriver driver) throws Exception {
+
+        WebElement projectButtonWebElement = driver.findElement(By.xpath("//li[@data-id='project']/a"));
+        projectButtonWebElement.click();
 
         WebElement taskButtonWebElement = driver.findElement(By.xpath("//li[@data-id='task']/a"));
         taskButtonWebElement.click();
@@ -111,17 +104,22 @@ public class ZenTaoTest {
         peopleWebElement.findElement(By.xpath("//li[@title='"+people+"']")).click();
 
         WebElement taskWebElement = driver.findElement(By.name("name"));
-        taskWebElement.clear();
         taskWebElement.sendKeys(taskName);
 
         WebElement estimateWebElement = driver.findElement(By.name("estimate"));
-        estimateWebElement.clear();
         estimateWebElement.sendKeys(estimate);
 
-        WebElement submitWebElement = driver.findElement(By.id("submit"));
-        submitWebElement.click();
+        WebElement contentWebElement = driver.findElement(By.xpath("//div[@class='ke-edit']/iframe"));
+        contentWebElement.sendKeys(content);
 
-        return null;
+        WebElement submitWebElement = driver.findElement(By.id("submit"));
+       submitWebElement.click();
+
+        Thread.sleep(2000);//等待0.5秒
+        List<WebElement>  taskList= driver.findElements(By.xpath("//table[@id='taskList']/tbody/tr"));
+        String id=taskList.get(0).getAttribute("data-id");
+        String name=taskList.get(0).findElements(By.tagName("td")).get(2).getAttribute("title");
+        System.out.println("task#"+id+"  "+name);
     }
 
 

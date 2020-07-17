@@ -4,12 +4,14 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.tarzan.reptile.domain.InfoResult;
 import com.tarzan.reptile.domain.PlatformResult;
+import com.tarzan.reptile.entity.InfoEntity;
 import com.tarzan.reptile.entity.PlatformEntity;
 import com.tarzan.reptile.utils.HttpUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +51,7 @@ public class ReptileDemo {
         ResourceBundle rb = ResourceBundle.getBundle("reptile");
         username = rb.getString("reptile.username");
         password = rb.getString("reptile.password");
-        nameList.add("掌上偃师");  //每日调取接口有次数限制，所以查一个比较好
+        nameList.add("Petjust百加世");  //每日调取接口有次数限制，所以查一个比较好
       //  nameList.add("平安洛阳");
     }
 
@@ -74,7 +76,7 @@ public class ReptileDemo {
                     InfoResult infoResult = getInfoResult(driver, token, platform.getFakeId(), 0, 5);
                     if (CollectionUtils.isNotEmpty(infoResult.getAppMsgList())) {
                         infoResult.getAppMsgList().forEach(e -> {
-                            System.out.println(e);
+                            getContent(e);
                         });
                     }
                 }
@@ -116,6 +118,26 @@ public class ReptileDemo {
         }
         Thread.sleep(15000);
         return gson.fromJson(infoList.text(), InfoResult.class);
+    }
+
+    /**
+     * 方法描述:获取微信公众文章的内容html文本
+     *
+     * @Return {@link String}
+     * @throws
+     * @date 2020年07月17日 14:56:06
+     */
+    private static  String getContent(InfoEntity info){
+        driver.get(info.getLink());
+        Document preDocument = Jsoup.parse(driver.getPageSource());
+        WebElement element = driver.findElement(By.xpath("//div[@id='js_content']"));
+        Element preList = preDocument.getElementById("js_content");
+        Elements  elements = preList.getElementsByTag("img");
+        elements.forEach(item->{
+            item.attr("src",item.attr("data-src"));
+        });
+        System.out.println(preList);
+        return null;
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.tarzan.reptile.task;
 
-import com.tarzan.reptile.core.ReptileDemo;
 import com.tarzan.reptile.service.ReptileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
