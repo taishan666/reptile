@@ -29,9 +29,8 @@ springBoot 单项目架构
 
 #### 系统运行视图
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0612/141019_d5ee2bee_1981977.png "cc9207b96f12b04c52f8279cb918f32.png")
-#### 技术交流
-
-微信号：vxhqqh
-qq号：1334512682
+#### 技术交流&问题反馈
+      联系QQ:1334512682 
+      微信号：vxhqqh
 
 
