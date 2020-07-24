@@ -2,10 +2,10 @@ package com.tarzan.reptile.core;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import com.tarzan.reptile.domain.InfoResult;
-import com.tarzan.reptile.domain.PlatformResult;
-import com.tarzan.reptile.entity.InfoEntity;
-import com.tarzan.reptile.entity.PlatformEntity;
+import com.tarzan.reptile.domain.other.InfoResult;
+import com.tarzan.reptile.domain.other.PlatformResult;
+import com.tarzan.reptile.domain.entity.InfoEntity;
+import com.tarzan.reptile.domain.entity.PlatformEntity;
 import com.tarzan.reptile.utils.HttpUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

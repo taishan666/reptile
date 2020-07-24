@@ -2,9 +2,9 @@ package com.tarzan.reptile.service;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import com.tarzan.reptile.domain.InfoResult;
-import com.tarzan.reptile.domain.PlatformResult;
-import com.tarzan.reptile.entity.PlatformEntity;
+import com.tarzan.reptile.domain.other.InfoResult;
+import com.tarzan.reptile.domain.other.PlatformResult;
+import com.tarzan.reptile.domain.entity.PlatformEntity;
 import com.tarzan.reptile.mapper.InfoDao;
 import com.tarzan.reptile.mapper.PlatformDao;
 import com.tarzan.reptile.utils.HttpUtils;
@@ -58,8 +58,8 @@ public class ReptileService {
         ResourceBundle rb = ResourceBundle.getBundle("reptile");
         username = rb.getString("reptile.username");
         password = rb.getString("reptile.password");
-        nameList.add("掌上偃师");  //每日调取接口有次数限制，所以查一个比较好
-      //  nameList.add("平安洛阳");
+       // nameList.add("掌上偃师");  //每日调取接口有次数限制，所以查一个比较好
+        nameList.add("平安洛阳");
     }
 
 

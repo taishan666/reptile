@@ -31,10 +31,8 @@ public class WechatTask {
     @Autowired
     private ReptileService reptileService;
 
-
     @PostConstruct
     public  void init(){
-      //  ReptileDemo.crawling();
         reptileService.crawling();
     }
 
@@ -44,7 +42,6 @@ public class WechatTask {
         i++;
         logger.info("===================第"+i+"轮======================");
         logger.info("===========每隔一分钟更新警告数据start==============");
-        //ReptileDemo.crawling();
         reptileService.crawling();
         logger.info("===========每隔一分钟更新警告数据end================");
     }

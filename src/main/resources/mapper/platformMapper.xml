@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tarzan.reptile.mapper.PlatformDao">
 
-    <insert id="insertUnique" parameterType="com.tarzan.reptile.entity.PlatformEntity">
+    <insert id="insertUnique" parameterType="com.tarzan.reptile.domain.entity.PlatformEntity">
     insert into t_plat_form (fake_id, nickname, alias,round_head_img,service_type)
     SELECT #{fakeId}, #{nickname}, #{alias},#{roundHeadImg},#{serviceType}
     FROM t_plat_form WHERE NOT EXISTS (SELECT id FROM  t_plat_form WHERE nickname = #{nickname})

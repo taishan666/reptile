@@ -1,6 +1,5 @@
 package com.tarzan.reptile.core;
 
-import com.tarzan.reptile.utils.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

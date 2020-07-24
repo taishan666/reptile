@@ -1,7 +1,7 @@
 package com.tarzan.reptile.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.tarzan.reptile.entity.PlatformEntity;
+import com.tarzan.reptile.domain.entity.PlatformEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

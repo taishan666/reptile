@@ -1,7 +1,7 @@
 package com.tarzan.reptile.utils;
 
 
-import com.tarzan.reptile.domain.SimpleEmail;
+import com.tarzan.reptile.domain.other.SimpleEmail;
 
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
