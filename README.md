@@ -50,6 +50,10 @@ springBoot 单项目架构
 
 #### 系统运行视图
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0612/141019_d5ee2bee_1981977.png "cc9207b96f12b04c52f8279cb918f32.png")
+#### 可视化页面
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/180527_49676bda_1981977.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/180555_09b09a49_1981977.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/180621_2bae8894_1981977.png "屏幕截图.png")
 #### 技术交流&问题反馈
       联系QQ:1334512682 
       微信号：vxhqqh
