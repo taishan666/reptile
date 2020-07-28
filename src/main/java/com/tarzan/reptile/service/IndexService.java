@@ -1,5 +1,6 @@
 package com.tarzan.reptile.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tarzan.reptile.domain.entity.InfoEntity;
 import com.tarzan.reptile.domain.entity.PlatformEntity;
 import com.tarzan.reptile.mapper.InfoDao;
@@ -28,7 +29,9 @@ public class IndexService {
     @Autowired
     private InfoDao infoDao;
 
-    public List<InfoEntity> list(){
+    public List<InfoEntity> list(String appmsgid){
+        QueryWrapper<InfoEntity> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("appmsgid",appmsgid);
         return infoDao.selectList(null);
     }
 

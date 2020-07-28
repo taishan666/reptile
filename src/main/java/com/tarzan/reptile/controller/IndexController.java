@@ -1,6 +1,8 @@
 package com.tarzan.reptile.controller;
 
+import com.tarzan.reptile.domain.dto.InfoDTO;
 import com.tarzan.reptile.domain.dto.PlatformDTO;
+import com.tarzan.reptile.domain.entity.InfoEntity;
 import com.tarzan.reptile.domain.entity.PlatformEntity;
 import com.tarzan.reptile.service.IndexService;
 import com.tarzan.reptile.utils.ImageUtil;
@@ -44,6 +46,18 @@ public class IndexController {
     @GetMapping("/about")
     private String about(Model model){
         return "/about";
+    }
+
+    @GetMapping("/list")
+    private String list(Model model){
+        List<InfoEntity> list=indexService.list("2651438825");
+        List<InfoDTO> resultList=list.stream().map(e->{
+            InfoDTO dto=SmartBeanUtil.copy(e,InfoDTO.class);
+            dto.setImgBase64("data:image/png;base64,"+ImageUtil.getImgUrlToBase64(e.getCover()));
+            return dto;
+        }).collect(Collectors.toList());
+        model.addAttribute("infoList", resultList);
+        return "/list";
     }
 
 

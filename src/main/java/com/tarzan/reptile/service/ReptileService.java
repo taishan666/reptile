@@ -58,8 +58,13 @@ public class ReptileService {
         ResourceBundle rb = ResourceBundle.getBundle("reptile");
         username = rb.getString("reptile.username");
         password = rb.getString("reptile.password");
-       // nameList.add("掌上偃师");  //每日调取接口有次数限制，所以查一个比较好
-        nameList.add("平安洛阳");
+        nameList.add("洛阳旅游");
+        nameList.add("洛阳交警");
+        nameList.add("洛阳消防");
+        nameList.add("FM927洛阳交通广播");
+        nameList.add("考古洛阳");
+        nameList.add("绿色洛阳");
+
     }
 
 
