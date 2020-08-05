@@ -19,6 +19,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ClassUtils;
 
 import java.util.*;
 
@@ -29,7 +30,7 @@ import java.util.*;
 public class ReptileService {
 
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
+    private static String webDriverPath = ClassUtils.getDefaultClassLoader().getResource("chromedriver/chromedriver.exe").getPath();
     private static String targetPath = "https://mp.weixin.qq.com";
     private static String searchPath = "https://mp.weixin.qq.com/cgi-bin/searchbiz";
     private static String appmsgPath = "https://mp.weixin.qq.com/cgi-bin/appmsg";
@@ -66,7 +67,6 @@ public class ReptileService {
         nameList.add("绿色洛阳");
 
     }
-
 
 
     public  void crawling() {
