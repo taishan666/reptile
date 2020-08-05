@@ -1,4 +1,4 @@
-package com.tarzan.reptile.core;
+package com.tarzan.reptile.demo;
 
 import java.io.IOException;
 

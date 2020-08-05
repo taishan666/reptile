@@ -1,4 +1,4 @@
-package com.tarzan.reptile.core;
+package com.tarzan.reptile.demo;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

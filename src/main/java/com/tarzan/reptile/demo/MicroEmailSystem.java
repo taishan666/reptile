@@ -1,4 +1,4 @@
-package com.tarzan.reptile.core;
+package com.tarzan.reptile.demo;
 
 
 import com.tarzan.reptile.domain.other.SimpleEmail;
