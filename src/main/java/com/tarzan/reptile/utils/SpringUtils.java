@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 /**
  * spring工具类
  *
- * @author liu yapeng
+ * @author tarzan
  * @version 1.0
- * @date 2020/8/5$ 11:07$
+ * @date 2020/8/5
  * @since JDK1.8
  */
 @Component

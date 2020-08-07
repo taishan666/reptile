@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.util.ClassUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ import java.util.ResourceBundle;
  */
 public class ZenTaoCreateTask {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="F:\\idea_workspace\\JavaDemo\\chromedriver_win32\\chromedriver.exe";
+    private static String webDriverPath = ClassUtils.getDefaultClassLoader().getResource("chromedriver/chromedriver.exe").getPath();
     private static String targetPath = "http://172.16.10.26:12345/zentao/user-login-L3plbnRhby9teS5odG1s.html";
 
     private static WebDriver driver = null;
@@ -25,10 +26,10 @@ public class ZenTaoCreateTask {
     private static String password = null;
 
     //项目名称（必须和禅道项目名称一致）
-    private static String projectName = "智能矿山项目";
+    private static String projectName = "CIM6D-智慧施工-2020";
 
     //任务名称
-    private static String taskName = "回采进度汇报模块接口开发";
+    private static String taskName = "精装修-返回单元列表接口开发";
 
     //内容描述
     private static String content = "";
@@ -40,7 +41,7 @@ public class ZenTaoCreateTask {
     private static String  people = "L:刘亚鹏";
 
     //预估时长
-    private static String  estimate = "10";
+    private static String  estimate = "3";
 
 
     static {

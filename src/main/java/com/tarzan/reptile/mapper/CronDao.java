@@ -5,11 +5,9 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 /**
- * @author liu yapeng
+ * @author tarzan
  * @version 1.0
- * @company 洛阳图联科技有限公司
- * @copyright (c) 2019 LuoYang TuLian Co'Ltd Inc. All rights reserved.
- * @date 2020/8/5$ 11:23$
+ * @date 2020/8/5 11:23
  * @since JDK1.8
  */
 @Mapper

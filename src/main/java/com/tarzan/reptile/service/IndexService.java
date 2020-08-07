@@ -39,4 +39,6 @@ public class IndexService {
         return platformDao.selectList(null);
     }
 
+
+
 }
