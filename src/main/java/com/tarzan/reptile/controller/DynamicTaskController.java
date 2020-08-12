@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 定时任务控制器
@@ -22,12 +23,16 @@ public class DynamicTaskController {
 
 
     @GetMapping("/task/start")
-    private void start(Model model){
+    private ModelAndView start(ModelAndView model){
         taskService.startCron();
+        model.setViewName("/");
+        return model;
     }
 
     @GetMapping("/task/stop")
-    private void stop(Model model){
+    private ModelAndView stop(ModelAndView model){
         taskService.stopCron();
+        model.setViewName("/");
+        return model;
     }
 }

@@ -26,7 +26,6 @@ public class RunnableTask implements Runnable {
     @Override
     public void run() {
         i++;
-        reptileService.crawling();
         log.info("===================第"+i+"轮======================");
         log.info("=============第"+i+"轮采集数据start================");
         //reptileService.crawling();

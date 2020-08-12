@@ -33,6 +33,8 @@ public class DynamicTaskService {
 
     private ScheduledFuture<?> future;
 
+    public static int taskStatus=0;
+
     @Bean
     public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
         return new ThreadPoolTaskScheduler();
@@ -41,10 +43,17 @@ public class DynamicTaskService {
     public  void startCron() {
         String cron=cronDao.getCron();
         if(StringUtils.isBlank(cron)){
+            taskStatus=0;
             log.error("定时任务开启失败");
         }else{
-            future = threadPoolTaskScheduler.schedule(new RunnableTask(), triggerContext -> new CronTrigger(cron).nextExecutionTime(triggerContext));
-            log.info("定时任务开启成功");
+            if(taskStatus==0){
+                future = threadPoolTaskScheduler.schedule(new RunnableTask(), triggerContext -> new CronTrigger(cron).nextExecutionTime(triggerContext));
+                taskStatus=1;
+                log.info("定时任务开启成功");
+            }else{
+                log.info("定时任务正在执行");
+            }
+
         }
     }
 
@@ -52,7 +61,8 @@ public class DynamicTaskService {
         if (future != null) {
             future.cancel(true);
         }
-        log.info("定时任务关闭");
+        taskStatus=0;
+        log.info("定时任务关闭成功");
     }
 
 }

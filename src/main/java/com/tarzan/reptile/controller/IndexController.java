@@ -4,6 +4,7 @@ import com.tarzan.reptile.domain.dto.InfoDTO;
 import com.tarzan.reptile.domain.dto.PlatformDTO;
 import com.tarzan.reptile.domain.entity.InfoEntity;
 import com.tarzan.reptile.domain.entity.PlatformEntity;
+import com.tarzan.reptile.service.DynamicTaskService;
 import com.tarzan.reptile.service.IndexService;
 import com.tarzan.reptile.utils.ImageUtil;
 import com.tarzan.reptile.utils.SmartBeanUtil;
@@ -40,6 +41,7 @@ public class IndexController {
             return dto;
         }).collect(Collectors.toList());
         model.addAttribute("platformList", resultList);
+        model.addAttribute("taskStatus",DynamicTaskService.taskStatus);
         return "/index";
     }
 
