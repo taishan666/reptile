@@ -47,9 +47,11 @@ public class DynamicTaskService {
             log.error("定时任务开启失败");
         }else{
             if(taskStatus==0){
-                future = threadPoolTaskScheduler.schedule(new RunnableTask(), triggerContext -> new CronTrigger(cron).nextExecutionTime(triggerContext));
-                taskStatus=1;
                 log.info("定时任务开启成功");
+                RunnableTask runnableTask= new RunnableTask();
+                runnableTask.run();
+                taskStatus=1;
+                future = threadPoolTaskScheduler.schedule(runnableTask, triggerContext -> new CronTrigger(cron).nextExecutionTime(triggerContext));
             }else{
                 log.info("定时任务正在执行");
             }

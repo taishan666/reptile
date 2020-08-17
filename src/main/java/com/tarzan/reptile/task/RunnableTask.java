@@ -28,7 +28,7 @@ public class RunnableTask implements Runnable {
         i++;
         log.info("===================第"+i+"轮======================");
         log.info("=============第"+i+"轮采集数据start================");
-        //reptileService.crawling();
+        reptileService.crawling();
         log.info("=============第"+i+"轮采集数据end==================");
     }
 }

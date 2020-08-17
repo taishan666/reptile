@@ -29,7 +29,7 @@ public class ZenTaoCreateTask {
     private static String projectName = "CIM6D-智慧施工-2020";
 
     //任务名称
-    private static String taskName = "精装修-返回单元列表接口开发";
+    private static String taskName = "精装修-质量目标分解添加、修改、详情接口修改";
 
     //内容描述
     private static String content = "";
@@ -41,7 +41,7 @@ public class ZenTaoCreateTask {
     private static String  people = "L:刘亚鹏";
 
     //预估时长
-    private static String  estimate = "3";
+    private static String  estimate = "6";
 
 
     static {
