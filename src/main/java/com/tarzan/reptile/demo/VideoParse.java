@@ -30,7 +30,7 @@ public class VideoParse {
     private static final String videoSavePath="d:/短视频/";
 
     //分享链接（手动修改）
-    private static String targetPath = "奇怪，刚刚和妈妈的衣架子交心攀谈后，怎么感觉头上有一圈星星呢～ https://v.kuaishou.com/6Rq0gB 复制此链接，打开【快手App】直接观看！";
+    private static String targetPath = "这下可以安心的让你对象给你准备节日礼物啦～#520 https://v.kuaishou.com/82iovx 复制此消息，打开【快手】直接观看！";
 
     public static void main(String[] args) {
         parseUrl(targetPath);
@@ -66,9 +66,12 @@ public class VideoParse {
         String redirectUrl = HttpUtil.createGet(url).addHeaders(headers).execute().header("Location");
         String body= HttpUtil.createGet(redirectUrl).addHeaders(headers).execute().body();
         Document doc= Jsoup.parse(body);
-        Elements videoElement = doc.select("video[id=video-player]");
-        String videoUrl = videoElement.get(0).attr("src");
-        String title = videoElement.get(0).attr("alt");
+        Elements videoElement = doc.select("script[type=text/javascript]");
+        String videoInfo = videoElement.get(3).data().replaceAll("window.pageData= ","");
+        JSONObject json =JSONObject.parseObject(videoInfo);
+        String title = json.getJSONObject("video").getString("caption");
+        String videoUrl=json.getJSONObject("video").getString("srcNoMark");
+        videoUrl=videoUrl.substring(0,videoUrl.indexOf("?"));
         log.debug(videoUrl);
         log.debug(title);
         downVideo(videoUrl,title,"快手视频");
