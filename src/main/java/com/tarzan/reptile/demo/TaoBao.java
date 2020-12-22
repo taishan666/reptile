@@ -52,7 +52,7 @@ public class TaoBao {
         options.addArguments("Upgrade-Insecure-Requests=1");
         options.addArguments("User-Agent=Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4");
         //不打开浏览器，后台运行
-        options.addArguments("--headless");
+       // options.addArguments("--headless");
         try {
             if (Objects.isNull(driver)){
                 driver = new ChromeDriver(options);

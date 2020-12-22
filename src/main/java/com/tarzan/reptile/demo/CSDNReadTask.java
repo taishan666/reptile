@@ -72,6 +72,12 @@ public class CSDNReadTask implements Runnable {
         while (true) {
             titles.forEach(e->{
                 String url = e.select("a").attr("href");
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
+                System.out.println(url);
                 HttpUtil.createGet(url).execute().body();
             });
             i++;
