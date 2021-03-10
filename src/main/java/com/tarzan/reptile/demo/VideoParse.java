@@ -30,7 +30,7 @@ public class VideoParse {
     private static final String videoSavePath="d:/短视频/";
 
     //分享链接（手动修改）
-    private static String targetPath = "您已偏航，请在合适的位置掉头#健身 #撸铁女孩  https://v.douyin.com/JqLSq7h/ 椱制佌链接，哒kai抖茵搜索，直接观看视频！";
+    private static String targetPath = "";
 
     public static void main(String[] args) {
         parseUrl(targetPath);

@@ -39,6 +39,7 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!--lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -119,6 +120,7 @@
 			<artifactId>beetl-framework-starter</artifactId>
 			<version>1.2.33.RELEASE</version>
 		</dependency>
+		<!--阿里巴巴fastjson-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
