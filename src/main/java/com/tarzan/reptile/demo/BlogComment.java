@@ -21,7 +21,7 @@ import java.util.Set;
 public class BlogComment{
 
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="E:\\project\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
+    private static String webDriverPath ="E:\\work_space\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
 
     //登录地址
     private static String loginUrl = "https://passport.csdn.net/login";
@@ -235,11 +235,12 @@ public class BlogComment{
         driver.get(loginUrl);
         Thread.sleep(1000);
 
-        WebElement element = driver.findElement(By.xpath("//div[@class='main-select']/ul/li[2]/a"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='main-select']/ul/li[1]/a"));
         element.click();
-        Thread.sleep(1000);
+        System.out.println("等待微信扫码。。。。。。。。。。");
+        Thread.sleep(15000);
 
-        WebElement usernameWebElement = driver.findElement(By.id("all"));
+  /*      WebElement usernameWebElement = driver.findElement(By.id("all"));
         usernameWebElement.sendKeys(username);
         Thread.sleep(1000);
 
@@ -251,7 +252,7 @@ public class BlogComment{
         WebElement btnWebElement = driver.findElement(By.xpath("//button[@data-type='account']"));
         btnWebElement.click();
         Thread.sleep(1000);
-
+*/
         Set<Cookie> cookies =driver.manage().getCookies();
         cookies.forEach(e->{
             cookieStr=cookieStr+e.getName()+"="+e.getValue()+";";
