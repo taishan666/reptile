@@ -45,13 +45,17 @@ public class CSDNReadTask implements Runnable {
 
     public static void main(String[] args)  {
 
-        ExecutorService es = Executors.newFixedThreadPool(3);
+        ExecutorService es = Executors.newFixedThreadPool(5);
         CSDNReadTask page1 = new CSDNReadTask("https://blog.csdn.net/weixin_40986713/article/list/1?orderby=ViewCount");
         CSDNReadTask page2 = new CSDNReadTask("https://blog.csdn.net/weixin_40986713/article/list/2?orderby=ViewCount");
         CSDNReadTask page3 = new CSDNReadTask("https://blog.csdn.net/weixin_40986713/article/list/3?orderby=ViewCount");
+        CSDNReadTask page4 = new CSDNReadTask("https://blog.csdn.net/weixin_40986713/article/list/4?orderby=ViewCount");
+        CSDNReadTask page5 = new CSDNReadTask("https://blog.csdn.net/weixin_40986713/article/list/5?orderby=ViewCount");
         es.execute(page1);
         es.execute(page2);
         es.execute(page3);
+        es.execute(page4);
+        es.execute(page5);
 
 
     }

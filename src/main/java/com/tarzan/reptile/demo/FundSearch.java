@@ -8,6 +8,7 @@ import org.apache.commons.compress.utils.Lists;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FundSearch {
@@ -26,14 +27,60 @@ public class FundSearch {
     }
 
     public static void main(String[] args) {
+        System.out.println(Math.pow(1.242,17));
         List<Fund> funds = getAllFunds();
         System.out.println("共扫描基金" + funds.size() + "只");
-        System.out.println("搜索近1周涨幅大于1%，近1月涨幅大于4%，近3月涨幅大于12%，近6月涨幅大于24%的基金，近1年涨大于48%的基金");
-        funds = funds.stream().filter(e -> e.getDealStatus() == 1 && e.getWeekRise() > 1 && e.getMonthRise() > 4 && e.getThreeMonthsRise() > 12 && e.getSixMonthsRise() > 24 && e.getOneYearRise() > 48).collect(Collectors.toList());
-        System.out.println("符合条件的基金共" + funds.size() + "只");
+        Fund param=new Fund();
+        param.setWeekRise(1.0);
+        param.setMonthRise(6.0);
+        param.setThreeMonthsRise(20.0);
+        param.setSixMonthsRise(42.0);
+       param.setOneYearRise(100.0);
+        param.setTwoYearsRise(200.0);
+       // param.setThreeYearsRise(300.0);
+        funds =filterResult(funds,param);
         funds.forEach(e -> System.out.println(e.getRowData()));
     }
 
+    public static List<Fund> filterResult(List<Fund> funds,Fund param){
+        StringBuffer buffer=new StringBuffer("搜索到");
+        if(param!=null){
+            if(Objects.nonNull(param.getDealStatus())){
+                funds = funds.stream().filter(e -> e.getDealStatus()==param.getDealStatus()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getWeekRise())){
+                buffer.append("近1周涨幅大于"+param.getWeekRise()+"%,");
+                funds = funds.stream().filter(e -> e.getWeekRise()>=param.getWeekRise()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getMonthRise())){
+                buffer.append("近1月涨幅大于"+param.getMonthRise()+"%,");
+                funds = funds.stream().filter(e -> e.getMonthRise()>=param.getMonthRise()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getThreeMonthsRise())){
+                buffer.append("近3月涨幅大于"+param.getThreeMonthsRise()+"%,");
+                funds = funds.stream().filter(e -> e.getThreeMonthsRise()>=param.getThreeMonthsRise()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getSixMonthsRise())){
+                buffer.append("近6月涨幅大于"+param.getSixMonthsRise()+"%,");
+                funds = funds.stream().filter(e -> e.getSixMonthsRise()>=param.getSixMonthsRise()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getOneYearRise())){
+                buffer.append("近1年涨幅大于"+param.getOneYearRise()+"%,");
+                funds = funds.stream().filter(e -> e.getOneYearRise()>=param.getOneYearRise()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getTwoYearsRise())){
+                buffer.append("近2年涨幅大于"+param.getTwoYearsRise()+"%,");
+                funds = funds.stream().filter(e -> e.getTwoYearsRise()>=param.getTwoYearsRise()).collect(Collectors.toList());
+            }
+            if(Objects.nonNull(param.getThreeYearsRise())){
+                buffer.append("近3年涨幅大于"+param.getThreeYearsRise()+"%,");
+                funds = funds.stream().filter(e -> e.getThreeYearsRise()>=param.getThreeYearsRise()).collect(Collectors.toList());
+            }
+        }
+        buffer.append("\n符合条件的基金共" + funds.size() + "只");
+        System.out.println(buffer);
+        return funds;
+ }
 
     public static List<Fund> getAllFunds() {
         List<Fund> dataList = Lists.newArrayList();
@@ -162,7 +209,7 @@ public class FundSearch {
          **/
         private Double threeYearsRise;
         /**
-         * 近1年
+         * 今年以来
          **/
         private Double curYearRise;
         /**

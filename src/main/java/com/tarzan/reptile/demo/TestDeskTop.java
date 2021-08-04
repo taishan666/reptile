@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 /**
- * Java实现在QQ上输入文字并发送
- * @author tarzan LIU
+ * Java机器人实现自动打开google浏览器，输入指定网站访问
+ * @author tarzan
  *
  */
 public class TestDeskTop {

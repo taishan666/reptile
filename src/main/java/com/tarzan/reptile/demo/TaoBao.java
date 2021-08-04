@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.util.ClassUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,9 +31,6 @@ public class TaoBao {
     private static String password = "a1334512682";
 
 
-    public static void main(String[] args) {
-        start();
-    }
 
 
     /**

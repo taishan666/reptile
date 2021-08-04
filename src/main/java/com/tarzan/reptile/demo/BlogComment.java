@@ -5,6 +5,7 @@ import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -28,7 +29,8 @@ public class BlogComment{
 
     //获取文章列表接口
     private static String moreBlogsApi = "https://blog.csdn.net/api/articles?type=more&category=ops&shown_offset=0";
-
+    //用户状态检测接口
+    private static String checkUserApi = "https://passport.csdn.net/v1/api/check/userstatus";
     //评论接口
     private static String commentBlogApi = "https://blog.csdn.net/phoenix/web/v1/comment/submit";
 
@@ -158,39 +160,43 @@ public class BlogComment{
          String  UserName=driver.manage().getCookieNamed("UserName").getValue();
          //过滤评论过的问斩
         List<Blog> unCommentBlogs=isCommentBlog(commentListApi,blogList,UserName);
-        //写入文章评论
-         commentOneBlogUrl(commentBlogApi,unCommentBlogs);
+        if(CollectionUtils.isNotEmpty(unCommentBlogs)){
+            //写入文章评论
+            commentOneBlogUrl(commentBlogApi,unCommentBlogs,UserName);
+        }
     }
 
     /**
      * 提交单个评论
      *
      */
-    public static void commentOneBlogUrl(String url, List<Blog> titleLinks)  {
+    public static void commentOneBlogUrl(String url, List<Blog> titleLinks,String  UserName)  {
         Set<Cookie> cookies =driver.manage().getCookies();
         cookieStr="";
         cookies.forEach(e->{
             cookieStr=cookieStr+e.getName()+"="+e.getValue()+";";
         });
-        titleLinks.forEach(e->{
+        for (Blog e : titleLinks) {
             try {
-            String comment=RandomUtil.randomEle(commentList);
-            String param="commentId=&content="+comment+"&articleId="+e.getProduct_id();
-            String result= HttpUtil.createPost(url).header("Cookie",cookieStr).body(param).execute().body();
-            System.out.println("文章《"+e.getTitle()+"》网址 "+e.getUrl()+" 评论内容："+comment);
-            //todo code 做判断
-            System.out.println(result);
-            JSONObject resultJson=JSONObject.parseObject(result);
-            if(resultJson.getInteger("code")!=200){
-               //System.exit(1);
-                Thread.sleep(60*60*1000);//休息1个小时
-            }
-            Thread.sleep(45000);//10秒评论一次
+                String comment=RandomUtil.randomEle(commentList);
+                String checkParam="{\"username\":\"weixin_40986713\"}";
+                String param="commentId=&content="+comment+"&articleId="+e.getProduct_id();
+                String body= HttpUtil.createPost(checkUserApi).header("Cookie",cookieStr).body(checkParam).execute().body();
+                System.out.println("body="+body);
+                String result= HttpUtil.createPost(url).header("Cookie",cookieStr).body(param).execute().body();
+                System.out.println("文章《"+e.getTitle()+"》网址 "+e.getUrl()+" 评论内容："+comment);
+                System.out.println(result);
+                JSONObject resultJson=JSONObject.parseObject(result);
+                if(resultJson.getInteger("code")!=200){
+                    //System.exit(1);
+                    Thread.sleep(60*60*1000);//休息1个小时
+                }
+                Thread.sleep(45000);//10秒评论一次
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();
                 System.exit(0);
             }
-        });
+        }
     }
 
     //过滤已经评论过的文章

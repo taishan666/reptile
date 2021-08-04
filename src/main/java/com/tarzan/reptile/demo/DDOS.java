@@ -13,9 +13,9 @@ import java.util.concurrent.Executors;
 public class DDOS implements Runnable {
 
     //攻击的网路地址或ip
-    private static String ipAddr = "http://172.16.10.5:1888/";
+    private static String ipAddr = "http://172.18.80.1/blog/article/1";
     //攻击的ddos数量（太小没效果，太大容易自己死机）
-    private static Integer ddosNum = 1000;
+    private static Integer ddosNum = 1;
 
     //主方法
     public static void main(String[] args) {
