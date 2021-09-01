@@ -133,6 +133,28 @@
 			<version>3.3.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/ws.schild/jave-core -->
+		<dependency>
+			<groupId>ws.schild</groupId>
+			<artifactId>jave-core</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<!-- 以下依赖根据系统二选一 -->
+		<!-- win系统平台的依赖 -->
+		<dependency>
+			<groupId>ws.schild</groupId>
+			<artifactId>jave-nativebin-win64</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.24</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

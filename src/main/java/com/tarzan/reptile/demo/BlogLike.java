@@ -29,7 +29,7 @@ import java.util.Set;
 public class BlogLike{
 
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="E:\\project\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
+    private static String webDriverPath ="E:\\work_space\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
 
     //登录地址
     private static String loginUrl = "https://passport.csdn.net/login";

@@ -4,9 +4,9 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.compress.utils.Lists;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -168,13 +168,13 @@ public class BlogNewComment {
         for (BlogComment.Blog e : titleLinks) {
             try {
             driver.get(e.getUrl());
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             WebElement helpWebElement = driver.findElement(By.id("comment_content"));
             helpWebElement.click();
             String comment=RandomUtil.randomEle(commentList);
             helpWebElement.sendKeys(comment);
                 System.out.println("文章《"+e.getTitle()+"》网址 "+e.getUrl()+" 评论内容："+comment);
-                Thread.sleep(1000);
+                Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(2000,3000,4000,5000)));
 
             WebElement submit = driver.findElement(By.xpath("//input[@class='btn btn-sm btn-comment']"));
             submit.click();

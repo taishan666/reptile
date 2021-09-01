@@ -2,26 +2,22 @@ package com.tarzan.reptile.demo;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.Charsets;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 @Data
 @Slf4j
 public class FileDataSource {
 
 
-    public  static String folderPath="C:\\Users\\liuya\\Desktop\\接口数据\\json数据\\巷道.json";
+    public  static String folderPath="C:\\Users\\liuya\\Downloads\\Promo Fast Opener\\Promo Fast Opener.aep";
 
     public static void main(String[] args) {
-        long start=System.currentTimeMillis();
-        for (int i = 0; i < 1000; i++) {
-            getData();
-        }
-        System.out.println("耗时"+(System.currentTimeMillis()-start)+"ms");
+        System.out.println(getData());
 
     }
 
@@ -30,7 +26,7 @@ public class FileDataSource {
         StringBuffer sb = new StringBuffer();
         try {
             FileInputStream out = new FileInputStream(folderPath);
-            InputStreamReader reader = new InputStreamReader(out, StandardCharsets.UTF_8);
+            InputStreamReader reader = new InputStreamReader(out, Charsets.ISO_8859_1);
             BufferedReader in = new BufferedReader(reader);
             String line;
             while ((line = in.readLine()) != null) {
