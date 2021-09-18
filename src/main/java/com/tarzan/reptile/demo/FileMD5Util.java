@@ -12,7 +12,7 @@ public class FileMD5Util {
 
     public static void main(String[] args) throws IOException {
         //需要修改的文件
-        File file=new File("C:\\Users\\liuya\\Downloads\\坦克大战\\坦克大战（Java版本）课程设计文档.docx");
+        File file=new File("C:\\Users\\liuya\\Desktop\\pdf\\最新企业笔试面试题大全.pdf");
         //查询md5值
         System.out.println(getFileMD5(file));
         //修改md5值

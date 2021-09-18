@@ -30,7 +30,7 @@ public class VideoParse {
     private static final String videoSavePath="d:/短视频/";
 
     //分享链接（手动修改）
-    private static String targetPath = "";
+    private static String targetPath = "3.53 ndn:/ \"别眨眼，要沦陷\" %jennie %jisoo %lisa %rosé %blackpink   https://v.douyin.com/dhnxJuj/ 复製此鏈接，打开Dou荫搜索，直接觀看視频！";
 
     public static void main(String[] args) {
         parseUrl(targetPath);
@@ -91,7 +91,7 @@ public class VideoParse {
             con.header("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 12_1_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D57 Version/12.0 Safari/604.1");
             Connection.Response resp=con.method(Connection.Method.GET).execute();
             String videoUrl= videoPath+getItemId(resp.url().toString());
-            String jsonStr = Jsoup.connect(videoUrl).ignoreContentType(true).execute().body();
+            String jsonStr = HttpUtil.get(videoUrl);
             JSONObject json =JSONObject.parseObject(jsonStr);
             String videoAddress= json.getJSONArray("item_list").getJSONObject(0).getJSONObject("video").getJSONObject("play_addr").getJSONArray("url_list").get(0).toString();
             String title= json.getJSONArray("item_list").getJSONObject(0).getJSONObject("share_info").getString("share_title");
@@ -117,7 +117,8 @@ public class VideoParse {
      * @date 2020年08月04日 10:34:09
      */
     public static void downVideo(String httpUrl,String title,String source) {
-        String fileAddress = videoSavePath+"/"+source+"/"+title+".mp4";
+        title= title.replace("\"","");
+        String fileAddress = videoSavePath+"/"+source+"/"+title.trim()+".mp4";
         int byteRead;
         try {
             URL url = new URL(httpUrl);
