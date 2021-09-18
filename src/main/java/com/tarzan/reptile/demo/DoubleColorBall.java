@@ -1,4 +1,4 @@
-package com.tarzan.reptile;
+package com.tarzan.reptile.demo;
 
 
 import cn.hutool.core.util.RandomUtil;
