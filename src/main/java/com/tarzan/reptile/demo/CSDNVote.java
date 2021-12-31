@@ -120,6 +120,7 @@ public class CSDNVote {
                    if(CollectionUtils.isNotEmpty(starsEle)&&starsEle.size()>=starNum){
                        WebElement fiveStar=starsEle.get(starNum-1);
                        fiveStar.click();
+                       System.out.println("网址 "+voteSite+" 已投票"+starNum+"星");
                    }
                  /*  Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement helpWebElement = driver.findElement(By.xpath("//div[@class='comment-plugin']"));
