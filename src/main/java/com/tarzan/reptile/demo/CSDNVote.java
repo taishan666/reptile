@@ -100,7 +100,7 @@ public class CSDNVote {
      * @throws Exception
      */
     public static void voteUrl(WebDriver driver)  {
-        int num=603956282;
+        int num=603956368;
         for (int i = 0; i <10000; i++) {
             commentOneBlogUrl("https://bbs.csdn.net/topics/"+num);
             num++;
@@ -132,12 +132,12 @@ public class CSDNVote {
                    System.out.println("网址 "+voteSite+" 评论内容："+comment);
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement submit = driver.findElement(By.xpath("//div[@class='replay-btm']"));
-                   submit.click();*/
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
+                   submit.click();
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));*/
                }else{
                    System.out.println("普通帖子");
                }
-                Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
+              //  Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();
             }
