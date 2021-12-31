@@ -8,8 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.springframework.util.ClassUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**

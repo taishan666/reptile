@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * 首页控制器
  *
- * @author liu yapeng
+ * @author tarzan
  * @version 1.0
  * @company 洛阳图联科技有限公司
  * @copyright (c) 2019 LuoYang TuLian Co'Ltd Inc. All rights reserved.

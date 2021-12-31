@@ -13,8 +13,8 @@ import java.util.Iterator;
 public class PDFHelper1 {
 
     public static void main(String[] args) throws Exception {
-       addWatermark(new File("C:\\Users\\liuya\\Desktop\\pdf\\test.pdf"), "tarzan");
-        removeWatermark(new File("C:\\Users\\liuya\\Desktop\\pdf\\test_waterMark.pdf"));
+     //  addWatermark(new File("C:\\Users\\liuya\\Desktop\\pdf\\test.pdf"), "tarzan");
+        removeWatermark(new File("C:\\Users\\liuya\\Desktop\\word\\帆软报表帮助文档.pdf"));
     }
 
 

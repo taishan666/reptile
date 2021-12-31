@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.springframework.util.ClassUtils;
 
 import java.util.Objects;
@@ -82,6 +81,9 @@ public class JDShop {
         usernameWebElement.sendKeys(username);
         WebElement passwordWebElement = driver.findElement(By.id("pwd"));
         passwordWebElement.sendKeys(password);
+        WebElement agreeWebElement = driver.findElement(By.xpath("//input[@class='policy_tip-checkbox']"));
+        agreeWebElement.click();
+        Thread.sleep(200);//等待0.2秒
         WebElement btnWebElement = driver.findElement(By.xpath("//a[@class='btn J_ping btn-active']"));
         btnWebElement.click();
         System.out.println("登录成功");

@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 /**
  * 自定义未找到页面
  *
- * @author liu yapeng
+ * @author tarzan
  * @version 1.0
  * @company 洛阳图联科技有限公司
  * @copyright (c) 2019 LuoYang TuLian Co'Ltd Inc. All rights reserved.

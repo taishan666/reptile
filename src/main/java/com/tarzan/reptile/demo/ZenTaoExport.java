@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.*;
 
@@ -46,7 +47,7 @@ public class ZenTaoExport {
         System.setProperty(webDriver, webDriverPath);
         try {
             if (Objects.isNull(driver)){
-                driver = new ChromeDriver();
+                driver = new HtmlUnitDriver();
                 userLogin(driver);
             }
            // String token = getToken(driver);

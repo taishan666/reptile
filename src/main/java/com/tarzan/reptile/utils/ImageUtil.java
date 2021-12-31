@@ -11,7 +11,7 @@ import java.net.URL;
 /**
  * 图片工具
  *
- * @author liu yapeng
+ * @author tarzan
  * @version 1.0
  * @company 洛阳图联科技有限公司
  * @copyright (c) 2019 LuoYang TuLian Co'Ltd Inc. All rights reserved.
