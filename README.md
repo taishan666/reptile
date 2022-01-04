@@ -60,7 +60,27 @@ springBoot 单项目架构
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/180555_09b09a49_1981977.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0724/180621_2bae8894_1981977.png "屏幕截图.png")
 
+#### 常见问题
+在使用selenium启动谷歌Chrome浏览器的时候，是需要用到chromedirver的，两者之间的版本是需要匹配的，否则会出现下面类似的报错：
+
+```
+Only local connections are allowed.
+org.openqa.selenium.WebDriverException: unknown error: cannot find Chrome binary
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.18363 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 76 milliseconds
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'WIN-9T6EKDMSTI5', ip: '172.16.10.8', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_221'
+Driver info: driver.version: ChromeDriver
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+```
+ **
+解决方案，查看这篇文章** 
+
+[Selenium Chrome浏览器版本与chromedriver驱动兼容版本对照表](https://blog.csdn.net/weixin_40986713/article/details/115075324)
+
 #### 技术交流&问题反馈
       微信号：vxhqqh
+
 
 
