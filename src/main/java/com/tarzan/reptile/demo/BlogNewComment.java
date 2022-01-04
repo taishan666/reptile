@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class BlogNewComment {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="E:\\work_space\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
+    private static String webDriverPath ="D:\\workspace\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
 
     //登录地址
     private static String loginUrl = "https://passport.csdn.net/login";
@@ -35,6 +35,8 @@ public class BlogNewComment {
 
     //评论列表
     private static String commentListApi = "https://blog.csdn.net/phoenix/web/v1/comment/list/";
+
+    private static String likeBlogApi = "https://blog.csdn.net//phoenix/web/v1/article/like";
 
     private static WebDriver driver = null;
 
@@ -175,7 +177,7 @@ public class BlogNewComment {
                 Thread.sleep(2000);
              /*   driver.findElement(By.id("comment_content")).click();
                 Thread.sleep(1000);*/
-                System.out.println(driver.getPageSource());
+                likeOneBlogUrl(e);
             WebElement helpWebElement = driver.findElement(By.id("comment_content"));
           //  helpWebElement.click();
             String comment=RandomUtil.randomEle(commentList);
@@ -192,6 +194,27 @@ public class BlogNewComment {
                 interruptedException.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 点赞单个博文
+     *
+     * @throws Exception
+     */
+    public static void likeOneBlogUrl(BlogComment.Blog blog)  {
+        Set<Cookie> cookies =driver.manage().getCookies();
+        cookieStr="";
+        cookies.forEach(e->{
+            cookieStr=cookieStr+e.getName()+"="+e.getValue()+";";
+        });
+            try {
+                String param="articleId="+blog.getProduct_id();
+                String result= HttpUtil.createPost(likeBlogApi).header("Cookie",cookieStr).body(param).execute().body();
+                System.out.println(result);
+                Thread.sleep(30000);//10秒评论一次
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
     }
 
 

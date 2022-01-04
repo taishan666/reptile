@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CSDNVote {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="E:\\work_space\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
+    private static String webDriverPath ="D:\\workspace\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
 
     //登录地址
     private static String loginUrl = "https://passport.csdn.net/login";
@@ -45,9 +45,9 @@ public class CSDNVote {
         ResourceBundle rb = ResourceBundle.getBundle("csdn");
         username = rb.getString("csdn.username");
         password = rb.getString("csdn.password");
-        commentList.add("**2021年「博客之星」参赛博主：洛阳泰山\n" +
-                "PC端 https://blog.csdn.net/weixin_40986713 手机端：https://bbs.csdn.net/topics/603955514\n" +
-                "五星好评互评 原力值满级 只赚不亏 欢迎加博主好友来撩**");
+        commentList.add("**已经为博主投上五星好评，期待博主的回评\n" +
+                "https://bbs.csdn.net/topics/603955514\n" +
+                "中国人不骗中国人，五星好评互评 欢迎更多博主来撩**");
     }
 
 
@@ -100,7 +100,7 @@ public class CSDNVote {
      * @throws Exception
      */
     public static void voteUrl(WebDriver driver)  {
-        int num=603956368;
+        int num=603956466;
         for (int i = 0; i <10000; i++) {
             commentOneBlogUrl("https://bbs.csdn.net/topics/"+num);
             num++;
@@ -113,27 +113,29 @@ public class CSDNVote {
                 driver.get(voteSite);
                 String html= driver.getPageSource();
                if(html.contains("2021年「博客之星」参赛博主")){
+                 String name =driver.findElement(By.className("name")).getText();
+                   System.out.println(name);
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   List<WebElement> starsEle = driver.findElements(By.xpath("//span[@class='el-rate__item']/i[@class='el-rate__icon el-icon-star-off']"));
+                   List<WebElement> offStarsEle = driver.findElements(By.xpath("//span[@class='el-rate__item']/i[@class='el-rate__icon el-icon-star-off']"));
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   int starNum=4;
-                   if(CollectionUtils.isNotEmpty(starsEle)&&starsEle.size()>=starNum){
-                       WebElement fiveStar=starsEle.get(starNum-1);
-                       fiveStar.click();
+                   int starNum=5;
+                   if(CollectionUtils.isNotEmpty(offStarsEle)&&offStarsEle.size()>=starNum){
+                       WebElement offFiveStar=offStarsEle.get(starNum-1);
+                       offFiveStar.click();
                        System.out.println("网址 "+voteSite+" 已投票"+starNum+"星");
                    }
-                 /*  Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement helpWebElement = driver.findElement(By.xpath("//div[@class='comment-plugin']"));
                    helpWebElement.click();
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement textWebElement = driver.findElement(By.xpath("//div[@class='md_textarea isFocus']/textarea"));
                    String comment=RandomUtil.randomEle(commentList);
-                   textWebElement.sendKeys(comment);
+                   textWebElement.sendKeys("@"+name+" "+comment);
                    System.out.println("网址 "+voteSite+" 评论内容："+comment);
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement submit = driver.findElement(By.xpath("//div[@class='replay-btm']"));
                    submit.click();
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));*/
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                }else{
                    System.out.println("普通帖子");
                }
