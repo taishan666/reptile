@@ -12,11 +12,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class CSDNVote {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="D:\\workspace\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
+    private static String webDriverPath ="E:\\work_space\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
 
     //登录地址
     private static String loginUrl = "https://passport.csdn.net/login";
@@ -66,10 +65,12 @@ public class CSDNVote {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 // 设置后台静默模式启动浏览器
                 //   chromeOptions.addArguments("--headless");
+                //添加用户cookies
+                chromeOptions.addArguments("--user-data-dir=C:\\Users\\liuya\\AppData\\Local\\Google\\Chrome\\User Data1");
                 //启动浏览器
                 driver = new ChromeDriver(chromeOptions);
                 //登录
-                userLogin(driver);
+             //   userLogin(driver);
             }
             voteUrl(driver);
         } catch (Exception e) {
@@ -100,7 +101,7 @@ public class CSDNVote {
      * @throws Exception
      */
     public static void voteUrl(WebDriver driver)  {
-        int num=603956466;
+        int num=603956595;
         for (int i = 0; i <10000; i++) {
             commentOneBlogUrl("https://bbs.csdn.net/topics/"+num);
             num++;
@@ -118,13 +119,13 @@ public class CSDNVote {
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    List<WebElement> offStarsEle = driver.findElements(By.xpath("//span[@class='el-rate__item']/i[@class='el-rate__icon el-icon-star-off']"));
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   int starNum=5;
+                   int starNum=1;
                    if(CollectionUtils.isNotEmpty(offStarsEle)&&offStarsEle.size()>=starNum){
                        WebElement offFiveStar=offStarsEle.get(starNum-1);
                        offFiveStar.click();
                        System.out.println("网址 "+voteSite+" 已投票"+starNum+"星");
                    }
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
+               /*    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement helpWebElement = driver.findElement(By.xpath("//div[@class='comment-plugin']"));
                    helpWebElement.click();
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
@@ -134,7 +135,7 @@ public class CSDNVote {
                    System.out.println("网址 "+voteSite+" 评论内容："+comment);
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                    WebElement submit = driver.findElement(By.xpath("//div[@class='replay-btm']"));
-                   submit.click();
+                   submit.click();*/
                    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
                }else{
                    System.out.println("普通帖子");
