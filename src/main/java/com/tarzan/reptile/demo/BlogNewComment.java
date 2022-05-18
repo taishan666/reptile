@@ -85,9 +85,7 @@ public class BlogNewComment {
         commentList.add("宋江、卢俊义、吴用、公孙胜、关胜、林冲、秦明、呼延灼、花荣、柴进、李应、朱仝、鲁智深、武松、董平、张清、杨志、徐宁、索超、戴宗、刘唐、李逵、史进、穆弘、雷横、李俊、阮小二、张横、阮小五、张顺、阮小七、杨雄、石秀、解珍、解宝、燕青、朱武、黄信、孙立、宣赞、郝思文、韩滔、彭玘、单廷珪、魏定国、萧让、裴宣、欧鹏、邓飞、燕顺、杨林、凌振、蒋敬、吕方、郭盛、安道全、皇甫端、王英、扈三娘、鲍旭、樊瑞、孔明、孔亮、项充、李衮、金大坚、马麟、童威、童猛、孟康、侯健、陈达、杨春、郑天寿、陶宗旺、宋清、乐和、龚旺、丁得孙、穆春、曹正、宋万、杜迁、薛永、施恩、周通、李忠、杜兴、汤隆、邹渊、邹润、朱富、朱贵、蔡福、蔡庆、李立、李云、焦挺、石勇、孙新、顾大嫂、张青、孙二娘、王定六、郁保四、白胜、时迁、段景柱等108人感觉很赞");
         commentList.add("佐菲奥特曼、初代奥特曼、赛文奥特曼、杰克奥特曼、艾斯奥特曼、泰罗奥特曼、雷欧奥特曼、爱迪奥特曼、阿斯特拉奥特曼、尤迪安奥特曼、博伊奥特曼、乔尼亚斯奥特曼、史考特奥特曼、察克奥特曼、贝斯奥特曼、葛雷奥特曼、帕瓦特奥特曼、哉阿斯奥特曼、迪迦奥特曼、戴拿奥特曼、盖亚奥特曼、阿古茹奥特曼、高斯奥特曼、杰斯提斯奥特曼、雷杰多奥特曼、奈克斯特奥特曼、奈克瑟斯奥特曼、诺亚奥特曼、雷欧斯奥特曼、赛文奥特曼、麦克斯奥特曼、杰诺奥特曼、梦比优斯奥特曼、希卡利奥特曼、赛文X奥特曼、赛罗奥特曼、银河奥特曼、奥特之父、奥特之母、奥特之王等40位奥特曼觉得很赞。");
    */
-        commentList.add("** 最后冲刺，2021年「博客之星」参赛博主：洛阳泰山\n" +
-                "https://bbs.csdn.net/topics/603955514\n" +
-                "五星好评互评 原力值满级 只赚不亏 欢迎加博主好友来撩**");
+        commentList.add("对于优质文章，也许我的评论会迟到，但不会缺席。文章很赞，必须点赞!！哈哈哈");
     }
 
 
@@ -110,8 +108,9 @@ public class BlogNewComment {
                 chromeOptions.addArguments("--user-data-dir=C:\\Users\\liuya\\AppData\\Local\\Google\\Chrome\\User Data1");
                 //启动浏览器
                 driver = new ChromeDriver(chromeOptions);
+                driver.get("https://blog.csdn.net/");
                 //登录
-                userLogin(driver);
+               // userLogin(driver);
             }
             while (true){
                 commentBlog(driver);
@@ -186,7 +185,7 @@ public class BlogNewComment {
             helpWebElement.sendKeys(comment);
                 System.out.println("文章《"+e.getTitle()+"》网址 "+e.getUrl()+" 评论内容："+comment);
                 Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(2000,3000,4000,5000)));
-            WebElement submit = driver.findElement(By.xpath("//input[@class='btn btn-sm btn-comment']"));
+            WebElement submit = driver.findElement(By.xpath("//input[@class='btn-comment btn-comment-input']"));
             if(submit==null){
                 submit = driver.findElement(By.xpath("//input[@class='btn-comment btn-comment-input']"));
             }
@@ -213,6 +212,11 @@ public class BlogNewComment {
                 String param="articleId="+blog.getProduct_id();
                 String result= HttpUtil.createPost(likeBlogApi).header("Cookie",cookieStr).body(param).execute().body();
                 System.out.println(result);
+                JSONObject json=JSONObject.parseObject(result);
+                String message=json.getString("message");
+                if(!"success".equals(message)){
+                    System.exit(0);
+                }
                 Thread.sleep(30000);//10秒评论一次
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();

@@ -22,8 +22,6 @@ public class PDFHelper {
         merge(files,"C:/Users/liuya/Desktop/pdf//my_pdfnew.pdf");
     }
 
-
-
     public static boolean separate(File file, int page){
         try {
             PDDocument document = Loader.loadPDF(file);

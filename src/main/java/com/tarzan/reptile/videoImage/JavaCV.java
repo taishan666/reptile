@@ -12,19 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JavaCV {
-    final static String imagePath = "C:/Users/liuya/Desktop/people/";
+    final static String imagePath = "C:/Users/liuya/Desktop/image/";
     final static String videoPath = "C:/Users/liuya/Desktop/video/";
-    final static String videoName = "demo123.mp4";
+    final static String videoName = "demo.mp4";
     final static String imageMat = "png";
 
 
     public static void main(String[] args) throws Exception {
         //视频按帧数分成图片
-    //    videoToImages(videoPath + videoName, imagePath + videoName.substring(0, videoName.lastIndexOf(".")));
+        videoToImages(videoPath + videoName, imagePath + videoName.substring(0, videoName.lastIndexOf(".")));
         //图片合成视频
     //    imagesToVideo(videoPath + "newVideo.mp4", imagePath);
 
-        createMp4(videoPath+videoName,imagePath);
+  //      createMp4(videoPath+videoName,imagePath);
     }
 
 

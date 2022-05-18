@@ -17,9 +17,9 @@ public class PDFUtil {
 
     public static void main(String[] args) throws IOException {
         //提取图片
-        extractImages("C:\\Users\\liuya\\Desktop\\word\\帆软报表帮助文档.pdf");
+    //    extractImages("C:\\Users\\liuya\\Desktop\\pdf\\中信重工铸锻公司数字化工厂技术要求.pdf");
         //提取文字
-       // extractText("C:\\Users\\liuya\\Desktop\\word\\帆软报表帮助文档.pdf");
+        extractText("C:\\Users\\liuya\\Desktop\\pdf\\中信重工铸锻公司数字化工厂技术要求.pdf");
 
     }
 
@@ -45,7 +45,7 @@ public class PDFUtil {
             stripper.setEndPage(pageNumber);
           //  System.out.println(stripper.getText(pdd));
             //生成的txt的文件路径
-            String docPath =path.substring(0,path.lastIndexOf("."))+".txt";
+            String docPath =path.substring(0,path.lastIndexOf("."))+".doc";
             File doc = new File(docPath);
             if(!doc.exists()){
                 doc.createNewFile();

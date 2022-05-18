@@ -1,7 +1,5 @@
 package com.tarzan.reptile.demo;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -10,11 +8,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 /**
- * 文章采集
+ * 文章阅读
  * @author tarzan
  */
 @Component
-@AllArgsConstructor
 public class ArticleRead {
 
 
@@ -67,7 +64,9 @@ public class ArticleRead {
         Document doc=  getDocument(url);
         //获取文章标题
         Elements title = doc.select("h1[id=articleContentId]");
-        System.out.println(title.text());
+        if(title!=null){
+            System.out.println(title.text());
+        }
     }
 
     public static boolean readPage(String webUrl,int pageNum) {

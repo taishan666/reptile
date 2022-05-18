@@ -17,6 +17,9 @@ public class PDFHelper1 {
         removeWatermark(new File("C:\\Users\\liuya\\Desktop\\word\\帆软报表帮助文档.pdf"));
     }
 
+    public static void pdf2doc(String pdfPath) {
+
+    }
 
     /**
      * pdf添加文字水印
