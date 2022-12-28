@@ -21,13 +21,8 @@ public class CSDNVote {
     private static String loginUrl = "https://passport.csdn.net/login";
 
     //获取文章列表接口
-    private static String voteUrl = "https://bbs.csdn.net/topics/603955514";
+    private static String voteUrl = "https://bbs.csdn.net/forums/blogstar2022";
 
-    //评论接口
-    private static String commentBlogApi = "https://blog.csdn.net/phoenix/web/v1/comment/submit";
-
-    //评论列表
-    private static String commentListApi = "https://blog.csdn.net/phoenix/web/v1/comment/list/";
 
     private static WebDriver driver = null;
 
@@ -44,9 +39,9 @@ public class CSDNVote {
         ResourceBundle rb = ResourceBundle.getBundle("csdn");
         username = rb.getString("csdn.username");
         password = rb.getString("csdn.password");
-        commentList.add("**已经为博主投上五星好评，期待博主的回评\n" +
-                "https://bbs.csdn.net/topics/603955514\n" +
-                "中国人不骗中国人，五星好评互评 欢迎更多博主来撩**");
+        commentList.add("9级原力，5星已投，诚信支持，诚信互助：\n" +
+                "https://bbs.csdn.net/topics/611391339\n" +
+                "五星好评互评 欢迎更多博主来撩**");
     }
 
 
@@ -66,7 +61,7 @@ public class CSDNVote {
                 // 设置后台静默模式启动浏览器
                 //   chromeOptions.addArguments("--headless");
                 //添加用户cookies
-                chromeOptions.addArguments("--user-data-dir=C:\\Users\\liuya\\AppData\\Local\\Google\\Chrome\\User Data1");
+                chromeOptions.addArguments("--user-data-dir=C:\\Users\\Lenovo\\AppData\\Local\\Google\\Chrome\\User Data1");
                 //启动浏览器
                 driver = new ChromeDriver(chromeOptions);
                 //登录
@@ -101,7 +96,7 @@ public class CSDNVote {
      * @throws Exception
      */
     public static void voteUrl(WebDriver driver)  {
-        int num=603956595;
+        int num=611391339;
         for (int i = 0; i <10000; i++) {
             commentOneBlogUrl("https://bbs.csdn.net/topics/"+num);
             num++;
@@ -113,74 +108,39 @@ public class CSDNVote {
             try {
                 driver.get(voteSite);
                 String html= driver.getPageSource();
-               if(html.contains("2021年「博客之星」参赛博主")){
+               if(html.contains("2022年「博客之星」参赛博主")){
                  String name =driver.findElement(By.className("name")).getText();
                    System.out.println(name);
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
                    List<WebElement> offStarsEle = driver.findElements(By.xpath("//span[@class='el-rate__item']/i[@class='el-rate__icon el-icon-star-off']"));
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   int starNum=1;
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   int starNum=5;
                    if(CollectionUtils.isNotEmpty(offStarsEle)&&offStarsEle.size()>=starNum){
                        WebElement offFiveStar=offStarsEle.get(starNum-1);
                        offFiveStar.click();
                        System.out.println("网址 "+voteSite+" 已投票"+starNum+"星");
                    }
-               /*    Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   WebElement helpWebElement = driver.findElement(By.xpath("//div[@class='comment-plugin']"));
-                   helpWebElement.click();
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   WebElement textWebElement = driver.findElement(By.xpath("//div[@class='md_textarea isFocus']/textarea"));
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   WebElement commentPlugin=driver.findElement(By.className("comment-plugin"));
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   commentPlugin.isEnabled();
+                   commentPlugin.click();
+                   WebElement textarea=driver.findElement(By.tagName("textarea"));
                    String comment=RandomUtil.randomEle(commentList);
-                   textWebElement.sendKeys("@"+name+" "+comment);
-                   System.out.println("网址 "+voteSite+" 评论内容："+comment);
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
-                   WebElement submit = driver.findElement(By.xpath("//div[@class='replay-btm']"));
-                   submit.click();*/
-                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   textarea.sendKeys(comment);
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   WebElement replayBtm=driver.findElement(By.className("replay-btm"));
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   replayBtm.click();
+                   Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(1000,5000)));
+                   System.out.println("已经评论 ： "+comment);
                }else{
                    System.out.println("普通帖子");
                }
-              //  Thread.sleep(RandomUtil.randomEle(Lists.newArrayList(5000,10000)));
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();
             }
     }
-
-
-    /**
-     * 登录csdn页面,评论当然需要登录了
-     *
-     * @throws Exception
-     */
-    public static void userLogin(WebDriver driver) throws InterruptedException {
-
-        driver.get(loginUrl);
-        Thread.sleep(1000);
-
-        WebElement element = driver.findElement(By.xpath("//div[@class='main-select']/ul/li[1]/a"));
-        element.click();
-        System.out.println("等待微信扫码。。。。。。。。。。");
-        Thread.sleep(15000);
-
-  /*      WebElement usernameWebElement = driver.findElement(By.id("all"));
-        usernameWebElement.sendKeys(username);
-        Thread.sleep(1000);
-
-        WebElement passwordWebElement = driver.findElement(By.id("password-number"));
-        passwordWebElement.sendKeys(password);
-        Thread.sleep(1000);
-
-
-        WebElement btnWebElement = driver.findElement(By.xpath("//button[@data-type='account']"));
-        btnWebElement.click();
-        Thread.sleep(1000);
-*/
-        Set<Cookie> cookies =driver.manage().getCookies();
-        cookies.forEach(e->{
-            cookieStr=cookieStr+e.getName()+"="+e.getValue()+";";
-        });
-
-    }
-
 
 }

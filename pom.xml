@@ -189,11 +189,11 @@
 			<version>20.4</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.jacob/jacob -->
-		<dependency>
+<!--		<dependency>
 			<groupId>com.jacob</groupId>
 			<artifactId>jacob</artifactId>
 			<version>1.10</version>
-		</dependency>
+		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
 		<dependency>
 			<groupId>com.baidu.aip</groupId>
@@ -218,6 +218,12 @@
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.20.0-GA</version>
+		</dependency>
+		<!-- 图片压缩 -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
 		</dependency>
 
 

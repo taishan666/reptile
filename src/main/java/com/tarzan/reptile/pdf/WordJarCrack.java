@@ -38,7 +38,7 @@ public class WordJarCrack {
          File file=new File(jarName);
          aClass.writeFile(file.getParent());
       //  bClass.writeFile(file.getParent());
-        disposeJar(jarName);
+      //  disposeJar(jarName);
 
 
     }
