@@ -15,7 +15,7 @@ import java.util.*;
 
 public class CSDNVote {
     private static String webDriver = "webdriver.chrome.driver";
-    private static String webDriverPath ="E:\\work_space\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
+    private static String webDriverPath ="E:\\workspace\\reptile\\src\\main\\resources\\chromedriver\\chromedriver.exe";
 
     //登录地址
     private static String loginUrl = "https://passport.csdn.net/login";
@@ -61,7 +61,7 @@ public class CSDNVote {
                 // 设置后台静默模式启动浏览器
                 //   chromeOptions.addArguments("--headless");
                 //添加用户cookies
-                chromeOptions.addArguments("--user-data-dir=C:\\Users\\Lenovo\\AppData\\Local\\Google\\Chrome\\User Data1");
+                chromeOptions.addArguments("--user-data-dir=C:\\Users\\liuya\\AppData\\Local\\Google\\Chrome\\User Data");
                 //启动浏览器
                 driver = new ChromeDriver(chromeOptions);
                 //登录
@@ -96,7 +96,7 @@ public class CSDNVote {
      * @throws Exception
      */
     public static void voteUrl(WebDriver driver)  {
-        int num=611391504;
+        int num=611391632;
         for (int i = 0; i <10000; i++) {
             commentOneBlogUrl("https://bbs.csdn.net/topics/"+num);
             num++;
