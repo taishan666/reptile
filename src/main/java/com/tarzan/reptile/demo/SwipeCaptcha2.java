@@ -1,6 +1,6 @@
 package com.tarzan.reptile.demo;
 
-import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.bytedeco.javacpp.DoublePointer;
@@ -15,8 +15,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;
@@ -32,9 +30,12 @@ public class SwipeCaptcha2 {
         WebDriver driver= new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://dun.163.com/trial/jigsaw");
-       // driver.manage().window().maximize();
-        WebElement slider=driver.findElement(By.className("yidun_slider"));
-        slider.click();
+        //浏览器最大化
+        driver.manage().window().maximize();
+        //滑块按钮
+        WebElement sliderBtn=driver.findElement(By.className("yidun_slider"));
+        //点击触发滑块拼图
+        sliderBtn.click();
         Thread.sleep(500);
         Actions actions = new Actions(driver);
         String bgImage="E:\\screenshot\\bj.jpg";
@@ -50,9 +51,19 @@ public class SwipeCaptcha2 {
             HttpUtil.downloadFile(sliderImgSrc,sliderImage);
             double slideDistance=getMoveDist(bgImage,sliderImage);
             //修正误差
-            slideDistance = slideDistance +10;
-            actions.clickAndHold(slider).perform();
-            actions.moveByOffset((int)slideDistance, 0).perform();
+            int  moveDist = (int)slideDistance+10;
+            actions.clickAndHold(sliderBtn).perform();
+            //循环一点点的移动
+            for(int j=moveDist;j>=1;) {
+                int move=1;
+                if(j>1){
+                    move= RandomUtil.randomInt(1,j);
+                    actions.moveByOffset(move, 0).perform();
+                }else {
+                    actions.moveByOffset(move, 0).perform();
+                }
+                j=j-move;
+            }
             Thread.sleep(200);
             actions.release().perform();
             Thread.sleep(1000);
@@ -67,26 +78,28 @@ public class SwipeCaptcha2 {
      *
      */
     private static double getMoveDist(String bgImage,String sliderImage){
-        //11.5、从本地读取背景原图
+        //1.从本地读取背景原图,灰度处理
         Mat sliderMat = opencv_imgcodecs.imread(sliderImage, opencv_imgcodecs.IMREAD_GRAYSCALE);
         Mat bgMat = opencv_imgcodecs.imread(bgImage , opencv_imgcodecs.IMREAD_GRAYSCALE);
+        //2.二值化转黑白图
         opencv_imgproc.threshold(sliderMat,sliderMat,127,255, opencv_imgproc.THRESH_BINARY);
         opencv_imgproc.threshold(bgMat,bgMat,127,255, opencv_imgproc.THRESH_BINARY);
+        //保存为黑白图片
+        //opencv_imgcodecs.imwrite("E:\\screenshot\\slider_black.png",sliderMat);
+        //opencv_imgcodecs.imwrite("E:\\screenshot\\bg_black.jpg",bgMat);
         Mat result = new Mat();
-        //11.7、匹配小图在大图中的位置  用标准模式去比较 然后把返回结果给result
+        //3.匹配小图在大图中的位置  用标准模式去比较 然后把返回结果给result
         opencv_imgproc.matchTemplate(sliderMat, bgMat, result, opencv_imgproc.TM_CCORR_NORMED);
         opencv_core.normalize(result, result, 0, 1, opencv_core.NORM_MINMAX, -1, new Mat());
         DoublePointer pointer = new DoublePointer(new double[2]);
         org.bytedeco.opencv.opencv_core.Point maxLoc = new org.bytedeco.opencv.opencv_core.Point();
-        //11.8、获取匹配结果坐标
+        //4.获取匹配结果坐标
         opencv_core.minMaxLoc(result, null, pointer, null, maxLoc, null);
-        //11.9、在图上做标记
+        //5.在图上做标记
         opencv_imgproc.rectangle(sliderMat, maxLoc,
                 new Point(maxLoc.x() + bgMat.cols(), maxLoc.y() + bgMat.rows()),
                 new Scalar(0, 255, 0,1));
-       // opencv_imgcodecs.imwrite("E:\\screenshot\\slider_black.png",sliderMat);
-      //  opencv_imgcodecs.imwrite("E:\\screenshot\\bg_black.jpg",bgMat);
-       // System.out.println(maxLoc.x()+","+maxLoc.y()+"  x-y="+(maxLoc.x()-maxLoc.y()));
+        System.out.println("二维中坐标的位置："+maxLoc.x()+","+maxLoc.y());
         return maxLoc.x();
     }
 
