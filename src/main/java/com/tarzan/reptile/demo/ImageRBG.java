@@ -1,11 +1,13 @@
 package com.tarzan.reptile.demo;
 
+import java.awt.*;
+
 public class ImageRBG {
     public static void main(String[] args) {
        // int blackRgb = 0;
         System.out.println(toARGB("0,0,0"));
         System.out.println(toRGB(0));
-        System.out.println((0 << 24) );
+        System.out.println(Color.white.getRGB());
     }
 
 

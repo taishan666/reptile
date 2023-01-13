@@ -9,6 +9,10 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+/**
+ *
+ * 图片拼接
+ */
 public class PngFileWriter {
 
     public static void main(String[] args) {

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class ImageBlack {
     public static void main(String[] args) throws IOException {
-        String sliderImagePath="E:\\screenshot\\slider.png";
+        String sliderImagePath="E:\\screenshot\\certificate.png";
         BufferedImage sliderImage = ImageIO.read(new File(sliderImagePath));
         String whiteRgb = "255,255,255";
         String transparencyRgb = "0,0,0";
