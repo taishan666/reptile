@@ -74,10 +74,13 @@ Driver info: driver.version: ChromeDriver
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 ```
- **
-解决方案，查看这篇文章** 
+ **解决方案，查看这篇文章** 
 
 [Selenium Chrome浏览器版本与chromedriver驱动兼容版本对照表](https://blog.csdn.net/weixin_40986713/article/details/115075324)
+
+#### 爬虫教学专栏
+
+[Selenium自动化爬虫](https://blog.csdn.net/weixin_40986713/category_12165790.html)
 
 #### 技术交流&问题反馈
       微信号：vxhqqh
