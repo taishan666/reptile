@@ -73,7 +73,7 @@ public class Couplet {
     //文字标记
     public static BufferedImage fontMark(BufferedImage bufImg, String content) {
         Font font = new Font(fontName, Font.BOLD, 400);
-        FontDesignMetrics metrics = FontDesignMetrics.getMetrics(font);
+      //  FontDesignMetrics metrics = FontDesignMetrics.getMetrics(font);
         Graphics2D graphics = bufImg.createGraphics();
         graphics.setColor(Color.black);
         graphics.setFont(font);
