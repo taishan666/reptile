@@ -30,7 +30,7 @@ public class VideoParse {
     private static final String videoSavePath="d:/短视频/";
 
     //分享链接（手动修改）
-    private static String targetPath = "3.53 ndn:/ \"别眨眼，要沦陷\" %jennie %jisoo %lisa %rosé %blackpink   https://v.douyin.com/dhnxJuj/ 复製此鏈接，打开Dou荫搜索，直接觀看視频！";
+    private static String targetPath = "0.53 Dus:/ 这是看的第几遍 # 御姐  https://v.douyin.com/DqNGxhc/ 复制此链接，打开Dou音搜索，直接观看视频！";
 
     public static void main(String[] args) {
         parseUrl(targetPath);

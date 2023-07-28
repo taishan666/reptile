@@ -17,12 +17,12 @@ public class CartoonImage {
         changeBgColor ("E:\\screenshot\\certificate.png");
     }
 
-
-    private static void changeBgColor(String path) {
+    private static void newImage(String path) {
         try {
-            BufferedImage image = ImageIO.read(new File(path));
-            int h=image.getHeight();
-            int w=image.getWidth();
+            BufferedImage origin = ImageIO.read(new File(path));
+            int h=origin.getHeight();
+            int w=origin.getWidth();
+            BufferedImage image=new BufferedImage(h,w,BufferedImage.TYPE_4BYTE_ABGR);
             Graphics2D graphics= image.createGraphics();
             BasicStroke stokeLine = new BasicStroke(2.0f);
             graphics.setColor(Color.BLACK);
@@ -64,6 +64,74 @@ public class CartoonImage {
             String suffix=path.substring(path.lastIndexOf("."));
             String filePath =path.replace(suffix,"_cartoon"+suffix);
             ImageIO.write(image, "png", new File(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void changeBgColor(String path) {
+        try {
+            BufferedImage image;
+            //读取原图
+            BufferedImage origin = ImageIO.read(new File(path));
+            if(BufferedImage.TYPE_4BYTE_ABGR!=origin.getType()){
+                //转换图片类型
+                image = new BufferedImage(origin.getWidth(), origin.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+                image.createGraphics().drawImage(origin,0,0,null);
+            }else{
+                image=origin;
+            }
+            int h=image.getHeight();
+            int w=image.getWidth();
+            Graphics2D graphics= image.createGraphics();
+            BasicStroke stokeLine = new BasicStroke(2.0f);
+            graphics.setColor(Color.BLACK);
+            graphics.setStroke(stokeLine);
+            int lineW=w-w/20;
+            int h1=h/3;
+            int h2=h/3*2;
+            Polygon p1=new Polygon();
+            p1.addPoint(0,20);
+            p1.addPoint(lineW, 20);
+            p1.addPoint(lineW, h1);
+            p1.addPoint(0,h1-50);
+            graphics.drawPolygon(p1);
+
+            Polygon p2=new Polygon();
+            p2.addPoint(50,h1-10);
+            p2.addPoint(lineW, h1+40);
+            p2.addPoint(lineW, h2);
+            p2.addPoint(50,h2+50);
+            graphics.drawPolygon(p2);
+
+            int w1=lineW-lineW/4;
+            Polygon p3=new Polygon();
+            p3.addPoint(50,h2+80);
+            p3.addPoint(w1, h2+30);
+            p3.addPoint(w1, h-20);
+            p3.addPoint(50,h-20);
+            graphics.drawPolygon(p3);
+
+
+            Polygon p4=new Polygon();
+            p4.addPoint(w1+20,h2+30);
+            p4.addPoint(lineW, h2+20);
+            p4.addPoint(lineW, h-20);
+            p4.addPoint(w1+20,h-20);
+            graphics.drawPolygon(p4);
+            graphics.dispose();
+
+            for (int y = image.getMinY(); y < image.getHeight(); y++) {
+                for (int x = image.getMinX(); x < image.getWidth(); x++) {
+                      if(!p1.contains(x,y)&&!p2.contains(x,y)&&!p3.contains(x,y)&&!p4.contains(x,y)){
+                          image.setRGB(x,y,Color.white.getRGB());
+                      }
+                }
+            }
+            String suffix=path.substring(path.lastIndexOf("."));
+            String filePath =path.replace(suffix,"_cartoon"+suffix);
+            ImageIO.write(image, "png", new File(filePath));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
