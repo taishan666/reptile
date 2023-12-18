@@ -30,7 +30,7 @@ public class ArticleCollect {
     private final static String webDriver = "webdriver.chrome.driver";
     private final static String webDriverPath ="E:\\chromedriver\\chromedriver.exe";
     private  static WebDriver driver=null;
-    private final static int score=60;
+    private final static int score=88;
 
     static {
         System.setProperty(webDriver, webDriverPath);

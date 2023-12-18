@@ -44,7 +44,7 @@ public class tmImg {
         File file = new File(path);
         String fileName = file.getName();
         BufferedImage bi =  ImageIO.read(file);
-        Image image = (Image) bi;
+        Image image = bi;
         //将原图片的二进制转化为ImageIcon
         ImageIcon imageIcon = new ImageIcon(image);
         int width = imageIcon.getIconWidth();
