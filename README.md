@@ -4,6 +4,14 @@
 
   首先恭喜你看到了这个项目，在开发这个项目前，本人已经通过百度和gitee上搜索了很多关于微信公众号爬虫相关的项目，目前大致爬取微信公众号的方法重要有三种，下面有讲到，本人尝试前两种方法，第三种太多麻烦，需要耗费太多的时间和精力于是放弃，采取了性价比最高的第二种方法，本项目相对gitee其他的开源项目，最大的优势，功能相对更完善一些和代码近期推送的，随着微信公众号的这两年的改变，近期没有更新过的爬虫开源项目，大多不能正常运行。开发维护不易，觉得有用的点赞收藏吧，这也是我继续下去的动力。
 
+#### 我的博客
+
+1. **JAVA OPC UA专栏**：[https://blog.csdn.net/weixin_40986713/category_12356608.html](https://blog.csdn.net/weixin_40986713/category_12356608.html)
+2. **AI绘画 | Stable diffusion**：[https://blog.csdn.net/weixin_40986713/category_12481790.html](https://blog.csdn.net/weixin_40986713/category_12481790.html) 
+3. **java高级技术专栏**：[https://blog.csdn.net/weixin_40986713/category_10796066.html](https://blog.csdn.net/weixin_40986713/category_10796066.html)
+4. **java Selenium自动化爬虫**：[https://blog.csdn.net/weixin_40986713/category_12165790.html](https://blog.csdn.net/weixin_40986713/category_12165790.html)
+5. **java 推荐算法专栏**：[https://blog.csdn.net/weixin_40986713/category_12268014.html](https://blog.csdn.net/weixin_40986713/category_12268014.html)
+6. **Java视频图像处理专栏**：[https://blog.csdn.net/weixin_40986713/category_11109931.html](https://blog.csdn.net/weixin_40986713/category_11109931.html) 
 
 #### 项目背景
 个人在业余时间，写的一个以微信公众号爬虫为主要功能，普通网页爬虫、浏览器控制、邮件群发功能为辅的简单DEMO。功能简单，给开发者巨大的学习和发挥的空间。对spring boot和html有一些经验的人来说，上手简单，学习成本低.
